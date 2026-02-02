@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>You Are Handsome</title>
+    <title>A Message for You</title>
     <style>
         body {
             margin: 0;
@@ -9,78 +9,65 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #000;
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
+            background-image: url('OIP.webp');
+            background-size: cover;
+            background-position: center;
+            font-family: "Courier New", monospace;
         }
 
-        h1 {
-            color: #00eaff;
-            font-size: 70px;
-            text-shadow:
-                0 0 10px #00eaff,
-                0 0 20px #00eaff,
-                0 0 40px #00eaff,
-                0 0 80px #00eaff;
-            animation: pulse 2s infinite ease-in-out, glow 3s infinite alternate;
+        .typing-box {
+            background: rgba(255, 255, 255, 0.65);
+            padding: 30px 40px;
+            border-radius: 15px;
+            width: 70%;
+            max-width: 650px;
+            font-size: 24px;
+            line-height: 1.6;
+            color: #5a2a2a;
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+            backdrop-filter: blur(6px);
+            white-space: pre-wrap;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background: #5a2a2a;
+            margin-left: 3px;
+            animation: blink 0.7s infinite;
         }
 
-        @keyframes glow {
-            0% {
-                text-shadow:
-                    0 0 10px #00eaff,
-                    0 0 20px #00eaff,
-                    0 0 40px #00eaff,
-                    0 0 80px #00eaff;
-                color: #00eaff;
-            }
-            100% {
-                text-shadow:
-                    0 0 20px #ff00ff,
-                    0 0 40px #ff00ff,
-                    0 0 80px #ff00ff,
-                    0 0 160px #ff00ff;
-                color: #ff00ff;
-            }
-        }
-
-        /* Animated Background Lines */
-        .line {
-            position: absolute;
-            width: 2px;
-            height: 150vh;
-            background: linear-gradient(transparent, #00eaff, transparent);
-            animation: fall 5s linear infinite;
-            opacity: 0.4;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-200vh); }
-            100% { transform: translateY(200vh); }
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- Cool Falling Neon Lines -->
-    <script>
-        for (let i = 0; i < 20; i++) {
-            let line = document.createElement("div");
-            line.className = "line";
-            line.style.left = Math.random() * 100 + "vw";
-            line.style.animationDuration = 3 + Math.random() * 5 + "s";
-            document.body.appendChild(line);
-        }
-    </script>
+    <div class="typing-box" id="text"></div>
 
-    <h1>😎 You are so handsome 😎</h1>
+    <script>
+        const message = "Hello AK.\nI hope I did not disturb you.\nJust wanted to let you know that you are literally so handsome, sweet, kind and I just love how you make me smile all the time whenever I see you.\nBye, I love you :)";
+
+        let i = 0;
+        const speed = 45; // typing speed
+
+        function type() {
+            if (i < message.length) {
+                document.getElementById("text").innerHTML = message.substring(0, i+1) 
+                    + '<span class="cursor"></span>';
+                i++;
+                setTimeout(type, speed);
+            } else {
+                document.getElementById("text").innerHTML = message;
+            }
+        }
+
+        type();
+    </script>
 
 </body>
 </html>
-``
